@@ -1,5 +1,5 @@
 // Importat dependencias, modulos y servicvio de jwt
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const user = require("../models/user");
 const jwt = require("../services/jwt");
 const mongoosePagination = require("mongoose-pagination");
