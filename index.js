@@ -14,7 +14,7 @@ const puerto = process.env.PORT || 3000; // Usar el puerto del entorno si está 
 
 // Configurar CORS
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://prueba-8j3p.onrender.com'], // Reemplaza con la URL de tu frontend
+    origin: ['https://postter.netlify.app/', 'https://prueba-8j3p.onrender.com'], // Reemplaza con la URL de tu frontend
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // si necesitas enviar cookies de autenticación
 }));
