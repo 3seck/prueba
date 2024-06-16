@@ -171,7 +171,8 @@ const upload = async (req, res) => {
     extension != "png" &&
     extension != "jpg" &&
     extension != "jpeg" &&
-    extension != "gif"
+    extension != "gif" &&
+    extension != "webp"
   ) {
     // borrar el archivo subido
     const filePath = req.file.path;
