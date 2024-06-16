@@ -5,46 +5,42 @@ const cors = require('cors');
 
 console.log('Api node arrancada');
 
-
-// conexion a la base de datos
-    connection();
+// Conexión a la base de datos
+connection();
 
 // Crear servidor node
 const app = express();
-const puerto = 3000;
+const puerto = process.env.PORT || 3000; // Usar el puerto del entorno si está disponible
 
-// configurar cors
-app.use(cors());
+// Configurar CORS
+app.use(cors({
+    origin: 'http://localhost:5173/', // Reemplaza con la URL de tu frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // si necesitas enviar cookies de autenticación
+}));
 
-//convertir los datos del body a objetos js
-    app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
+// Convertir los datos del body a objetos JS
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// cargar conf rutas
-    const userRoutes = require('./routes/user');
-    const followRoutes = require('./routes/follow');
-    const publicationRoutes = require('./routes/publication');
+// Cargar conf rutas
+const userRoutes = require('./routes/user');
+const followRoutes = require('./routes/follow');
+const publicationRoutes = require('./routes/publication');
 
-
-    app.use('/api/user', userRoutes);
-    app.use('/api/follow', followRoutes);
-    app.use('/api/publication', publicationRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/follow', followRoutes);
+app.use('/api/publication', publicationRoutes);
 
 // Ruta prueba
 app.get('/ruta-prueba', (req, res) => {
-   return res.status(200).json
-   (
-    {
+    return res.status(200).json({
         "id": 1,
         "nombre": "Prueba"
-
-    }
-    );
+    });
 });
 
-
-// poner servidor a escuchar peticiones http
-
+// Poner servidor a escuchar peticiones HTTP
 app.listen(puerto, () => {
     console.log(`Servidor corriendo en http://localhost:${puerto}`);
 });
